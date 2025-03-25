@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konuş Kazan - Oyun</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>Konuş Kazan<span class="logo-dot">.</span></h1>
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="index.html#oyun-kurallari">Oyun Kuralları</a></li>
+                    <li><a href="index.html#oyunun-amaci">Oyunun Amacı</a></li>
+                    <li><a href="index.html#kategoriler">Kategoriler</a></li>
+                    <li><a href="#" class="active play-btn">Şimdi Oyna</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="game-container">
+        <!-- 1. Ekran: Oyun Ayarları -->
+        <section id="setup-screen" class="game-screen active">
+            <div class="container">
+                <div class="setup-content">
+                    <h2>Oyun Ayarları</h2>
+                    <div class="setup-form">
+                        <div class="setup-group">
+                            <h3>Oyuncu Sayısı</h3>
+                            <div class="button-group">
+                                <button class="setup-btn active" data-players="2">2 Oyuncu</button>
+                                <button class="setup-btn" data-players="3">3 Oyuncu</button>
+                                <button class="setup-btn" data-players="4">4 Oyuncu</button>
+                                <button class="setup-btn" data-players="5">5 Oyuncu</button>
+                                <button class="setup-btn" data-players="6">6 Oyuncu</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setup-group">
+                            <h3>Zorluk Seviyesi</h3>
+                            <div class="button-group">
+                                <button class="setup-btn active" data-difficulty="easy">Kolay</button>
+                                <button class="setup-btn" data-difficulty="medium">Orta</button>
+                                <button class="setup-btn" data-difficulty="hard">Zor</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-buttons">
+                        <button id="back-btn" class="btn outline-btn">Geri</button>
+                        <button id="start-game-btn" class="btn primary-btn">Oyunu Başlat</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Ekran: Oyun Tahtası -->
+        <section id="board-screen" class="game-screen">
+            <div class="container">
+                <div class="oyun-tahtasi-header">
+                    <div class="header-buttons">
+                        <button class="btn btn-outline-secondary sirayi-bitir">Sırayı Bitir</button>
+                        <button class="btn btn-icon settings-btn" aria-label="Ayarlar">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="game-layout">
+                    <!-- Sol Panel -->
+                    <div class="side-panel">
+                        <div class="info-box">
+                            <h3>Aktif Oyuncu</h3>
+                            <div class="player-info">
+                                <div class="player-avatar" id="active-player-icon" style="background-color: #2196F3;"></div>
+                                <span id="active-player-name">Oyuncu 1</span>
+                            </div>
+                        </div>
+                        
+                        <div class="zar-section">
+                            <h3>Zar</h3>
+                            <div class="simple-dice" id="dice" data-value="5">
+                                <!-- sol üst -->
+                                <div class="dot tl"></div>
+                                <!-- sağ üst -->
+                                <div class="dot tr"></div>
+                                <!-- sol orta -->
+                                <div class="dot ml"></div>
+                                <!-- orta -->
+                                <div class="dot center"></div>
+                                <!-- sağ orta -->
+                                <div class="dot mr"></div>
+                                <!-- sol alt -->
+                                <div class="dot bl"></div>
+                                <!-- sağ alt -->
+                                <div class="dot br"></div>
+                            </div>
+                            <button class="dice-btn" id="zarAtBtn">Zar At</button>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h3>Oyuncular</h3>
+                            <div id="players-list">
+                                <!-- JavaScript ile doldurulacak -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Oyun tahtası - Fotoğraftaki gerçek düzene göre düzeltilmiş -->
+                    <div class="game-board-container">
+                        <div class="game-board">
+                            <!-- ÜST SIRA - soldan sağa -->
+                            <div class="board-cell" data-position="8" data-category="tersten-konus">
+                                <span>Tersten Konuş</span>
+                            </div>
+                            <div class="board-cell" data-position="9" data-category="birini-betimleme">
+                                <span>Birini Betimleme</span>
+                            </div>
+                            <div class="board-cell" data-position="10" data-category="dusunce-atolyesi">
+                                <span>Düşünce Atölyesi</span>
+                            </div>
+                            <div class="board-cell" data-position="11" data-category="hikaye-atolyesi">
+                                <span>Hikaye Atölyesi</span>
+                            </div>
+                            <div class="board-cell" data-position="12" data-category="bir-anim">
+                                <span>Bir Anım</span>
+                            </div>
+                            <div class="board-cell" data-position="13" data-category="yakistir">
+                                <span>Yakıştır</span>
+                            </div>
+                            <div class="board-cell" data-position="14" data-category="hayal-atolyesi">
+                                <span>Hayal Atölyesi</span>
+                            </div>
+                            <div class="board-cell" data-position="15" data-category="bekleme-odasi">
+                                <span>Bekleme Odası</span>
+                            </div>
+                            
+                            <!-- SAĞ SÜTUN - yukarıdan aşağı -->
+                            <div class="board-cell" data-position="16" data-category="kelime-kopruleri">
+                                <span>Kelime Köprüleri</span>
+                            </div>
+                            <div class="board-cell" data-position="17" data-category="hikaye-atolyesi">
+                                <span>Hikaye Atölyesi</span>
+                            </div>
+                            <div class="board-cell" data-position="18" data-category="bitis">
+                                <span>BİTİŞ</span>
+                            </div>
+                            
+                            <!-- ALT SIRA - sağdan sola -->
+                            <div class="board-cell" data-position="0" data-category="baslangic">
+                                <span>BAŞLANGIÇ</span>
+                            </div>
+                            <div class="board-cell" data-position="1" data-category="birini-betimleme">
+                                <span>Birini Betimleme</span>
+                            </div>
+                            <div class="board-cell" data-position="2" data-category="hayal-atolyesi">
+                                <span>Hayal Atölyesi</span>
+                            </div>
+                            <div class="board-cell" data-position="3" data-category="tersten-konus">
+                                <span>Tersten Konuş</span>
+                            </div>
+                            <div class="board-cell" data-position="4" data-category="dusunce-atolyesi">
+                                <span>Düşünce Atölyesi</span>
+                            </div>
+                            <div class="board-cell" data-position="5" data-category="hikaye-atolyesi">
+                                <span>Hikaye Atölyesi</span>
+                            </div>
+                            <div class="board-cell" data-position="6" data-category="bir-anim">
+                                <span>Bir Anım</span>
+                            </div>
+                            <div class="board-cell" data-position="7" data-category="birini-betimleme">
+                                <span>Birini Betimleme</span>
+                            </div>
+                            
+                            <!-- SOL SÜTUN - aşağıdan yukarı -->
+                            <div class="board-cell" data-position="19" data-category="yakistir">
+                                <span>Yakıştır</span>
+                            </div>
+                            <div class="board-cell" data-position="20" data-category="kelime-kopruleri">
+                                <span>Kelime Köprüleri</span>
+                            </div>
+                            <div class="board-cell" data-position="21" data-category="hayal-atolyesi">
+                                <span>Hayal Atölyesi</span>
+                            </div>
+                            <div class="board-cell" data-position="22" data-category="bir-anim">
+                                <span>Bir Anım</span>
+                            </div>
+                            
+                            <!-- Oyun tahtası merkezi -->
+                            <div class="board-center">
+                                <div class="logo-container">
+                                    <img src="images/boardimage.jpeg" alt="Konuş Kazan" class="board-main-image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sağ Panel -->
+                    <div class="side-panel">
+                        <div class="info-box">
+                            <h3>Mevcut Etkinlik</h3>
+                            <div class="activity-info" id="activity-info">
+                                <div class="activity-header">
+                                    <div class="activity-icon" id="activity-icon">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                    <div class="activity-title" id="activity-title">-</div>
+                                </div>
+                                
+                                <!-- Görsel alanı -->
+                                <div id="activity-image-container" style="display: none;">
+                                    <img src="" alt="Etkinlik görseli" class="activity-image" id="activity-image">
+                                </div>
+                                
+                                <div class="activity-description">
+                                    <p id="activity-text">Zar atarak oyuna başlayın.</p>
+                                </div>
+                                
+                                <!-- Yönergeler ve örnekler varsayılan olarak gizli -->
+                                <div class="activity-instructions" id="activity-instructions" style="display: none;">
+                                    <h4>Etkinlik Yönergeleri:</h4>
+                                    <ul id="instruction-list"></ul>
+                                </div>
+                                <div class="activity-example" id="activity-example" style="display: none;">
+                                    <h4>Örnek:</h4>
+                                    <p id="example-text"></p>
+                                </div>
+                                <div class="activity-buttons">
+                                    <button id="success-btn" class="btn success-btn" disabled>Başarılı</button>
+                                    <button id="fail-btn" class="btn fail-btn" disabled>Başarısız</button>
+                                </div>
+                            </div>
+                            <!-- Süre çubuğu -->
+                            <div class="activity-timer">
+                                <div class="timer-text" id="timer-text">30 s</div>
+                                <div class="timer-bar">
+                                    <div class="timer-progress" id="timer-progress"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="game-message" id="game-message" style="display: none;">
+        <div class="message-content">
+            <h3 id="message-title">Tebrikler!</h3>
+            <p id="message-text">Etkinliği başarıyla tamamladınız.</p>
+            <div class="message-buttons">
+                <button id="message-btn" class="btn primary-btn">Tamam</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Ayarlar Modal -->
+    <div class="settings-modal">
+        <div class="modal-background"></div>
+        <div class="settings-content">
+            <div class="settings-header">
+                <h2>Oyunu Duraklat</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="settings-body">
+                <div class="settings-section">
+                    <h3>Oyuncu Sayısı</h3>
+                    <div class="button-group">
+                        <button class="setup-btn" data-players="2">2 Oyuncu</button>
+                        <button class="setup-btn" data-players="3">3 Oyuncu</button>
+                        <button class="setup-btn" data-players="4">4 Oyuncu</button>
+                        <button class="setup-btn active" data-players="5">5 Oyuncu</button>
+                        <button class="setup-btn" data-players="6">6 Oyuncu</button>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3>Zorluk Seviyesi</h3>
+                    <div class="button-group">
+                        <button class="setup-btn" data-difficulty="easy">Kolay</button>
+                        <button class="setup-btn active" data-difficulty="medium">Orta</button>
+                        <button class="setup-btn" data-difficulty="hard">Zor</button>
+                    </div>
+                </div>
+            </div>
+            <div class="settings-footer">
+                <button id="resume-game" class="resume-btn">Devam Et</button>
+                <button id="quit-game" class="quit-btn">Oyundan Çık</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Oyun Sonu Ekranı -->
+    <div id="game-end-modal" class="game-modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎉 Oyun Bitti!</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="game-end-text">Tebrikler! Oyunu tamamladınız.</p>
+                <div class="rankings-container">
+                    <h4>Sıralama</h4>
+                    <ul id="game-ranking-list"></ul>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn outline-btn" id="end-home-btn">Ana Sayfa</button>
+                    <button class="btn primary-btn" id="end-new-game-btn">Yeni Oyun</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript dosyaları -->
+    <script src="js/kartlar.js" type="text/javascript"></script>
+    <script src="js/game.js" type="text/javascript"></script>
+</body>
+</html> 
